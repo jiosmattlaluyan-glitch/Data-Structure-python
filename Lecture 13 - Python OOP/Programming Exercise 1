@@ -1,0 +1,83 @@
+class User:
+    """Represents a user profile with personal and professional information."""
+
+    def __init__(self, first_name, last_name, username, email, location='Unknown', program='Undecided'):
+        """
+        Initialize the user attributes.
+        We include several typical profile attributes.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.email = email
+        self.location = location
+        self.program = program
+        self.is_active = True
+        self.login_attempts = 0 
+
+    def describe_user(self):
+        """Prints a summary of the user's information."""
+        full_name = f"{self.first_name} {self.last_name}"
+        
+        print("\n--- User Profile Summary ---")
+        print(f"Full Name: {full_name.title()}")
+        print(f"Username: {self.username}")
+        print(f"Email: {self.email}")
+        print(f"Location: {self.location}")
+        print(f"Program: {self.program}")
+        print(f"Status: {'Active' if self.is_active else 'Inactive'}")
+        print(f"Login Attempts: {self.login_attempts}")
+        print("----------------------------")
+
+    def greet_user(self):
+        """Prints a personalized greeting to the user."""
+        print(f"\nHello, {self.first_name.title()}! Welcome back to the system.")
+
+    def increment_login_attempts(self):
+        """Increments the value of login_attempts by 1."""
+        self.login_attempts += 1
+    
+    def reset_login_attempts(self):
+        """Resets the value of login_attempts to 0."""
+        self.login_attempts = 0
+
+
+# ===============================================
+# Create Instances and Call Methods
+# ===============================================
+
+# 1. Create several instances representing different users.
+
+user1 = User('John', 'Doe', 'jdoe', 'jdoe@uni.edu', location='Manila', program='CPE')
+user2 = User('Alice', 'Smith', 'asmith', 'asmith@site.org', location='Quezon City', program='CS')
+user3 = User('Bob', 'Johnson', 'bjohnson', 'bj@mail.net') 
+# User 3 uses default values for location ('Unknown') and program ('Undecided').
+
+
+# 2. Call both required methods (greet_user and describe_user) for each user.
+
+print("--- Calling Methods for User 1 (John Doe) ---")
+user1.greet_user()
+user1.describe_user()
+
+print("\n--- Calling Methods for User 2 (Alice Smith) ---")
+user2.greet_user()
+user2.describe_user()
+
+print("\n--- Calling Methods for User 3 (Bob Johnson) ---")
+user3.greet_user()
+user3.describe_user()
+
+
+# Example of using the bonus methods (optional, but good practice):
+print("\n--- Demonstrating Login Attempts ---")
+
+# User 1 attempts to log in three times
+user1.increment_login_attempts()
+user1.increment_login_attempts()
+user1.increment_login_attempts()
+print(f"User 1 recorded login attempts: {user1.login_attempts}")
+
+# User 1 successfully logs in and resets attempts
+user1.reset_login_attempts()
+print(f"User 1 attempts reset. Current attempts: {user1.login_attempts}")

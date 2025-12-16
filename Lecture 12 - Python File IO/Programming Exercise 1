@@ -4,7 +4,7 @@ from datetime import datetime
 # Define the filename
 filename = 'guest_book.csv'
 
-# Set up the CSV file with headers if it doesn't exist
+
 try:
     with open(filename, 'r') as f:
         # Check if the file is empty or if it already has headers
