@@ -1,0 +1,51 @@
+import csv
+from datetime import datetime
+
+# Define the filename
+filename = 'guest_book.csv'
+
+# Set up the CSV file with headers if it doesn't exist
+try:
+    with open(filename, 'r') as f:
+        # Check if the file is empty or if it already has headers
+        pass # If it opens successfully, we assume it's set up or we'll append
+except FileNotFoundError:
+    # If the file doesn't exist, create it and write the headers
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Date', 'Guest Name'])
+    print(f"Created new file: {filename} with headers.")
+
+# Start the interactive loop
+print("\nWelcome to the Guest Book Program!")
+print("Enter 'quit' at any time to exit.")
+
+while True:
+    # 1. Prompt the user for their name
+    name = input("Please enter your name: ")
+
+    # Check for the exit condition
+    if name.lower() == 'quit':
+        break # Exit the while loop
+
+    # 2. Print a greeting
+    print(f"Hello, {name}! Welcome to the guest book.")
+
+    # 3. Record the visit
+    # Get the current date and time
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Prepare the row data
+    new_row = [current_time, name]
+
+    # Append the row to the CSV file
+    # 'a' mode means append, 'newline=' prevents blank rows in Windows
+    try:
+        with open(filename, 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(new_row)
+        print("Your visit has been recorded.")
+    except Exception as e:
+        print(f"An error occurred while writing to the file: {e}")
+
+print("Thank you for visiting! Guest Book program closing.")

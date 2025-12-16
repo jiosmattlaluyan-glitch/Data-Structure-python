@@ -1,0 +1,36 @@
+import csv
+
+# Define the filename (same as Exercise 1)
+filename = 'guest_book.csv'
+
+print(f"\n--- Reading {filename} Contents ---")
+
+try:
+    # Open the file for reading ('r' mode)
+    with open(filename, 'r', newline='') as f:
+        reader = csv.reader(f)
+
+        # Skip the header row (optional, but good practice)
+        header = next(reader)
+        print(f"Headers: {', '.join(header)}")
+        print("-" * 30)
+
+        # Iterate through the remaining rows and print the data
+        guest_count = 0
+        for row in reader:
+            # Row will be a list: [Date, Guest Name]
+            date = row[0]
+            name = row[1]
+            print(f"Guest: {name}, Visited on: {date}")
+            guest_count += 1
+
+        print("-" * 30)
+        print(f"Total entries found (excluding header): {guest_count}")
+
+except FileNotFoundError:
+    print(f"Error: The file '{filename}' was not found.")
+    print("Please run Programming Exercise 1 first to create the file.")
+except Exception as e:
+    print(f"An error occurred while reading the file: {e}")
+
+print("--- End of Guest Book Read ---")
