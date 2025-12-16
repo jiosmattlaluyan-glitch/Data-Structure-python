@@ -1,0 +1,55 @@
+import csv
+
+# 1. Define the CSV Header (Field Names)
+# These will be the keys used in the data dictionaries and the header row in the file.
+fieldnames = ['name', 'area', 'country_code2', 'country_code3']
+
+# 2. Define the CSV Data (Rows)
+# The data is a list of dictionaries.
+rows = [
+    {
+        'name': 'Albania', 
+        'area': 28748, 
+        'country_code2': 'AL', 
+        'country_code3': 'ALB'
+    },
+    {
+        'name': 'Algeria', 
+        'area': 2381741, 
+        'country_code2': 'DZ', 
+        'country_code3': 'DZA'
+    },
+    {
+        'name': 'American Samoa', 
+        'area': 199, 
+        'country_code2': 'AS', 
+        'country_code3': 'ASM'
+    }
+]
+
+# Define the filename
+filename = 'countries.csv'
+
+print(f"--- Starting to write data to {filename} ---")
+
+# 3. Write the data to the CSV file
+# 'w' mode opens the file for writing (will create it or overwrite existing content).
+# 'encoding='utf-8'' ensures proper handling of various characters.
+# 'newline=""' is recommended for Python on all operating systems to prevent blank rows.
+try:
+    with open(filename, 'w', encoding='utf-8', newline='') as f:
+        # Create a DictWriter object
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        
+        # Write the header row (column titles)
+        writer.writeheader()
+        
+        # Write the data rows
+        writer.writerows(rows)
+
+    print(f"Successfully created and wrote {len(rows)} records to {filename}.")
+
+except Exception as e:
+    print(f"An error occurred while writing the file: {e}")
+
+print("--- File writing complete ---")
