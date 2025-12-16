@@ -1,42 +1,42 @@
 import csv
 
-# Define the filename (same as Exercise 3)
-filename = 'countries.csv'
+# Define the filename (must match the file created in the last Exercise 3)
+filename = 'student_data.csv'
 
 print(f"\n--- Reading {filename} Contents ---")
 
 try:
     # Open the file for reading ('r' mode)
     with open(filename, 'r', encoding='utf-8', newline='') as f:
-        # Create a DictReader object
-        # It automatically uses the first row of the file as fieldnames (keys)
+        # Create a DictReader object. It uses the first row as the keys (headers).
         reader = csv.DictReader(f)
 
         # Print the headers that DictReader found
         print(f"File Headers (Keys): {', '.join(reader.fieldnames)}")
-        print("-" * 50)
+        print("-" * 60)
 
         # Iterate through the rows and print the data
         record_count = 0
         
-        # Each 'row' is an OrderedDict/dictionary
+        # Each 'row' is a dictionary containing the student's data
         for row in reader:
-            # We can access the values using the header names as keys
+            # We access the values using the new header names as keys
             name = row['name']
-            area = row['area']
-            code2 = row['country_code2']
-            code3 = row['country_code3']
+            student_id = row['student_id']
+            year = row['year']
+            program = row['program']
             
-            print(f"Country: {name:<20} | Area: {area:>10} sq km | Codes: {code2}/{code3}")
+            # Print the data in a clear, formatted way
+            print(f"Name: {name:<25} | ID: {student_id:>8} | Year: {year:<5} | Program: {program}")
             record_count += 1
 
-        print("-" * 50)
-        print(f"Total country records found (excluding header): {record_count}")
+        print("-" * 60)
+        print(f"Total student records found (excluding header): {record_count}")
 
 except FileNotFoundError:
     print(f"Error: The file '{filename}' was not found.")
-    print("Please run Programming Exercise 3 first to create the file.")
+    print("Please run the final version of Programming Exercise 3 first to create the file.")
 except Exception as e:
     print(f"An error occurred while reading the file: {e}")
 
-print("--- End of Country CSV Read ---")
+print("--- End of Student Data Read ---")
